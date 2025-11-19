@@ -75,9 +75,9 @@ keepalive_timeout 300;          # 設定 keep-alive 逾時為 65 秒
 
 你可以在建置時停用 chunk 分割。
 
-- Vercel 平台：新增環境變數 `DISABLE_CHUNK=1` 並重新部署。
-- 自行部署：在建置過程中使用 `DISABLE_CHUNK=1 yarn build`。
-- Docker 使用者：由於建置已在打包時完成，目前不支援停用此功能。
+在 Vercel 平台上，你可以將 `DISABLE_CHUNK=1` 新增到環境變數並重新部署。 
+對於自行部署的專案，可以在建置過程中使用 `DISABLE_CHUNK=1 yarn build` 。
+至於 Docker 使用者，由於建置已在打包時完成，目前不支援停用此功能。
 
 注意：停用後，所有資源會在使用者首次訪問時一次性載入。如果使用者網路不佳，可能導致白屏時間更長，影響體驗。請在決策時考慮此因素。
 
