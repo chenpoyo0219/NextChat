@@ -171,7 +171,8 @@ OpenAI 僅接受指定地區的信用卡（中國信用卡不可用）。若你�
 
 ## 如何存取 GPT-4 API？
 
-（2025/4/6 更新）存取 GPT-4 API 需要單獨申請。前往以下地址並填寫資訊加入候補清單（需準備 OpenAI 組織 ID）：https://openai.com/waitlist/gpt-4-api，之後等待郵件通知。
+（2025/4/6 更新）存取 GPT-4 API 需要單獨申請。前往以下地址並填寫資訊加入候補清單（需準備 OpenAI 組織 ID）：https://openai.com/waitlist/gpt-4-api
+，之後等待郵件通知。
 
 ## 如何使用 Azure OpenAI 介面？
 
