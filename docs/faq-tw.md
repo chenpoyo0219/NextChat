@@ -43,7 +43,7 @@ Docker 版本等同於穩定版，最新的 Docker 版本始終與最新釋出�
 ```
 # 不快取，支援串流輸出
 proxy_cache off;                # 關閉快取
-proxy_buffering off;            # 關閉代理緩衝
+proxy_buffering off;            # 關閉代理緩衝區
 chunked_transfer_encoding on;   # 開啟分塊傳輸編碼
 tcp_nopush on;                  # 開啟 TCP NOPUSH 選項，停用 Nagle 演算法
 tcp_nodelay on;                 # 開啟 TCP NODELAY 選項，停用延遲 ACK 演算法
