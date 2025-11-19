@@ -154,8 +154,7 @@ Vercel 是全球雲平台，幫助開發者快速建置與部署現代 Web 應�
 
 ## 如何啟用 OpenAI API？如何查詢餘額？
 
-官方網站（需 VPN）：https://platform.openai.com/account/usage  
-，部分用戶透過代理查詢餘額，請確認來源可靠以避免 API Key 洩漏。
+官方網站（需 VPN）：https://platform.openai.com/account/usage  ，部分用戶透過代理查詢餘額，請確認來源可靠以避免 API Key 洩漏。
 
 ## 為什麼新帳號沒有 API 餘額？
 
