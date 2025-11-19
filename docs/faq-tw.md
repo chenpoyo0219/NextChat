@@ -1,191 +1,191 @@
-# Frequently Asked Questions
+# 常見問題 (FAQ)
 
-## How to get help quickly?
+## 如何快速獲得幫助？
 
-1. Ask ChatGPT / Bing / Baidu / Google, etc.
-2. Ask online friends. Please provide background information and a detailed description of the problem. High-quality questions are more likely to get useful answers.
+1. 詢問 ChatGPT / Bing / 百度 / Google 等。
+2. 向線上朋友求助。請提供背景資訊與詳細的問題描述。高品質的問題更容易獲得有用的答案。
 
-# Deployment Related Questions
+# 部署相關問題
 
-## Why does the Docker deployment version always prompt for updates
+## 為什麼 Docker 部署版本總是提示更新？
 
-The Docker version is equivalent to the stable version, and the latest Docker is always consistent with the latest release version. Currently, our release frequency is once every one to two days, so the Docker version will always be one to two days behind the latest commit, which is expected.
+Docker 版本等同於穩定版，最新的 Docker 版本始終與最新釋出版本保持一致。目前，我們的釋出頻率為一到兩天一次，因此 Docker 版本通常會比最新提交落後一到兩天，這是符合預期的。
 
-## How to deploy on Vercel
+## 如何在 Vercel 上部署？
 
-1. Register a Github account and fork this project.
-2. Register Vercel (mobile phone verification required, Chinese number can be used), and connect your Github account.
-3. Create a new project on Vercel, select the project you forked on Github, fill in the required environment variables, and start deploying. After deployment, you can access your project through the domain provided by Vercel. (Requires proxy in mainland China)
+1. 註冊 Github 帳號並 fork 此專案。
+2. 註冊 Vercel（需要手機驗證，中國號碼可用），並連結你的 Github 帳號。
+3. 在 Vercel 上建立新專案，選擇你在 Github fork 的專案，填寫必要的環境變數並開始部署。部署完成後，你可以透過 Vercel 提供的網域存取你的專案。（中國大陸需要代理）
 
-- If you need to access it directly in China: At your DNS provider, add a CNAME record for the domain name, pointing to cname.vercel-dns.com. Then set up your domain access on Vercel.
+- 如果需要在中國直接存取：請在你的 DNS 服務商處，為該網域名稱新增一條 CNAME 記錄，指向 `cname.vercel-dns.com`。然後在 Vercel 上設定你的網域存取。
 
-## How to modify Vercel environment variables
+## 如何修改 Vercel 環境變數？
 
-- Enter the Vercel console page;
-- Select your chatgpt-next-web project;
-- Click on the Settings option at the top of the page;
-- Find the Environment Variables option in the sidebar;
-- Modify the corresponding values as needed.
+- 進入 Vercel 控制台頁面；
+- 選擇你的 chatgpt-next-web 專案；
+- 點擊頁面頂部的 Settings 選項；
+- 在側邊欄找到 Environment Variables 選項；
+- 按需修改對應的值。
 
-## What is the environment variable CODE? Is it necessary to set it?
+## 環境變數 CODE 是什麼？需要設定嗎？
 
-This is your custom access password, you can choose:
+這是你的自訂存取密碼，你可以選擇：
 
-1. Do not set it, delete the environment variable. Be cautious: anyone can access your project at this time.
-2. When deploying the project, set the environment variable CODE (supports multiple passwords, separated by commas). After setting the access password, users need to enter the access password in the settings page to use it. See [related instructions](https://github.com/Yidadaa/ChatGPT-Next-Web#access-password)
+1. 不設定，刪除該環境變數。注意：此時任何人都能存取你的專案。
+2. 在部署專案時設定環境變數 CODE（支援多組密碼，以逗號分隔）。設定後，使用者需要在設定頁面輸入存取密碼才能使用。詳見 [相關說明](https://github.com/Yidadaa/ChatGPT-Next-Web#access-password)。
 
-## Why doesn't the version I deployed have streaming response
+## 為什麼我部署的版本沒有串流回應？
 
-> Related discussion: [#386](https://github.com/Yidadaa/ChatGPT-Next-Web/issues/386)
+> 相關討論：[#386](https://github.com/Yidadaa/ChatGPT-Next-Web/issues/386)
 
-If you use nginx reverse proxy, you need to add the following code to the configuration file:
+如果你使用 nginx 反向代理，需要在設定檔中加入以下內容：
 
 ```
-# No caching, support streaming output
-proxy_cache off;  # Turn off caching
-proxy_buffering off;  # Turn off proxy buffering
-chunked_transfer_encoding on;  # Turn on chunked transfer encoding
-tcp_nopush on;  # Turn on TCP NOPUSH option, disable Nagle algorithm
-tcp_nodelay on;  # Turn on TCP NODELAY option, disable delay ACK algorithm
-keepalive_timeout 300;  # Set keep-alive timeout to 65 seconds
+# 不快取，支援串流輸出
+proxy_cache off;                # 關閉快取
+proxy_buffering off;            # 關閉代理緩衝
+chunked_transfer_encoding on;   # 開啟分塊傳輸編碼
+tcp_nopush on;                  # 開啟 TCP NOPUSH 選項，停用 Nagle 演算法
+tcp_nodelay on;                 # 開啟 TCP NODELAY 選項，停用延遲 ACK 演算法
+keepalive_timeout 300;          # 設定 keep-alive 逾時為 65 秒
 ```
 
-If you are deploying on netlify, this issue is still waiting to be resolved, please be patient.
+如果你部署在 Netlify，此問題仍待解決，請耐心等待。
 
-## I've deployed, but it's not accessible
+## 我已經部署好了，但無法存取
 
-Please check and troubleshoot the following issues:
+請檢查並排除以下問題：
 
-- Is the service started?
-- Is the port correctly mapped?
-- Is the firewall port open?
-- Is the route to the server okay?
-- Is the domain name resolved correctly?
+- 服務是否已啟動？
+- 埠號是否正確映射？
+- 防火牆埠是否開放？
+- 伺服器路由是否正常？
+- 網域名稱解析是否正確？
 
-## You may encounter an "Error: Loading CSS chunk xxx failed..."
+## 你可能會遇到 "Error: Loading CSS chunk xxx failed..."
 
-To reduce the initial white screen time, Next.js enables chunking by default. You can find the technical details here:
+為了減少初始白屏時間，Next.js 預設啟用 chunk 分割。技術細節可參考：
 
 - https://nextjs.org/docs/app/building-your-application/optimizing/lazy-loading
 - https://stackoverflow.com/questions/55993890/how-can-i-disable-chunkcode-splitting-with-webpack4
 - https://github.com/vercel/next.js/issues/38507
 - https://stackoverflow.com/questions/55993890/how-can-i-disable-chunkcode-splitting-with-webpack4
 
-However, Next.js has limited compatibility with older browsers, which can result in this error.
+然而，Next.js 對舊版瀏覽器的相容性有限，可能導致此錯誤。
 
-You can disable chunking during building.
+你可以在建置時停用 chunk 分割。
 
-For Vercel platform, you can add `DISABLE_CHUNK=1` to the environment variables and redeploy.
-For self-deployed projects, you can use `DISABLE_CHUNK=1 yarn build` during the build process.
-For Docker users, as the build is already completed during packaging, disabling this feature is currently not supported.
+- Vercel 平台：新增環境變數 `DISABLE_CHUNK=1` 並重新部署。
+- 自行部署：在建置過程中使用 `DISABLE_CHUNK=1 yarn build`。
+- Docker 使用者：由於建置已在打包時完成，目前不支援停用此功能。
 
-Note that when you disable this feature, all resources will be loaded on the user's first visit. This may result in a longer white screen time if the user has a poor network connection, affecting the user experience. Please consider this when making a decision.
+注意：停用後，所有資源會在使用者首次訪問時一次性載入。如果使用者網路不佳，可能導致白屏時間更長，影響體驗。請在決策時考慮此因素。
 
-# Usage Related Questions
+# 使用相關問題
 
-## Why does it always prompt "An error occurred, please try again later"
+## 為什麼總是提示 "An error occurred, please try again later"
 
-There could be many reasons, please check the following in order:
+可能原因很多，請依序檢查：
 
-- First, check if your code version is the latest version, update to the latest version and try again;
-- Check if the api key is set correctly, the environment variable name must be uppercase with underscores;
-- Check if the api key is available;
-- If you still cannot determine the problem after going through the above steps, please submit a new issue in the issue area and attach the runtime log of vercel or the log of docker runtime.
+- 確認程式碼版本是否為最新，更新後再試；
+- 檢查 API Key 是否正確設定，環境變數名稱必須大寫並用底線；
+- 檢查 API Key 是否可用；
+- 若仍無法判斷問題，請在 issue 區提交新 issue，並附上 Vercel 或 Docker 執行日誌。
 
-## Why does ChatGPT's reply get garbled
+## 為什麼 ChatGPT 的回覆會亂碼？
 
-In the settings page - model settings, there is an item called `temperature`. If this value is greater than 1, it may cause garbled replies. Adjust it back to within 1.
+在設定頁面 → 模型設定中，有一個 `temperature` 參數。如果此值大於 1，可能導致亂碼。請調整回 1 以內。
 
-## It prompts "Now it's unauthorized, please enter the access password on the settings page" when using?
+## 使用時提示 "Now it's unauthorized, please enter the access password on the settings page" ？
 
-The project has set an access password through the environment variable CODE. When using it for the first time, you need to go to settings and enter the access code to use.
+專案透過環境變數 CODE 設定了存取密碼。首次使用時需要在設定頁面輸入存取碼。
 
-## It prompts "You exceeded your current quota, ..." when using?
+## 使用時提示 "You exceeded your current quota, ..." ？
 
-The API KEY is problematic. Insufficient balance.
+API Key 有問題，餘額不足。
 
-## What is a proxy and how to use it?
+## 什麼是代理？如何使用？
 
-Due to IP restrictions of OpenAI, China and some other countries/regions cannot directly connect to OpenAI API and need to go through a proxy. You can use a proxy server (forward proxy) or a pre-configured OpenAI API reverse proxy.
+由於 OpenAI 的 IP 限制，中國及部分地區無法直接連線，需要透過代理。
 
-- Forward proxy example: VPN ladder. In the case of docker deployment, set the environment variable HTTP_PROXY to your proxy address (http://address:port).
-- Reverse proxy example: You can use someone else's proxy address or set it up for free through Cloudflare. Set the project environment variable BASE_URL to your proxy address.
+- 正向代理：例如 VPN 。Docker 部署時可設定環境變數 `HTTP_PROXY` 為代理地址 (http://address:port)。
+- 反向代理：可使用他人的代理地址，或透過 Cloudflare 免費設定。將專案環境變數 `BASE_URL` 設為代理地址。
 
-## Can I deploy it on a server in China?
+## 可以在中國伺服器部署嗎？
 
-It is possible but there are issues to be addressed:
+可以，但需注意：
 
-- Proxy is required to connect to websites such as Github and OpenAI;
-- Domain name resolution requires filing for servers in China;
-- Chinese policy restricts proxy access to foreign websites/ChatGPT-related applications, which may be blocked.
+- 需代理才能連線 Github 與 OpenAI；
+- 網域解析需在中國伺服器備案；
+- 中國政策限制代理存取境外網站/ChatGPT 應用，可能被封鎖。
 
-# Network Service Related Questions
+# 網路服務相關問題
 
-## What is Cloudflare?
+## 什麼是 Cloudflare？
 
-Cloudflare (CF) is a network service provider offering CDN, domain management, static page hosting, edge computing function deployment, and more. Common use cases: purchase and/or host your domain (resolution, dynamic domain, etc.), apply CDN to your server (can hide IP to avoid being blocked), deploy websites (CF Pages). CF offers most services for free.
+Cloudflare (CF) 是網路服務商，提供 CDN、網域管理、靜態頁面託管、邊緣運算等。常見用途：購買/託管網域、套用 CDN、部署網站 (CF Pages)。大部分服務免費。
 
-## What is Vercel?
+## 什麼是 Vercel？
 
-Vercel is a global cloud platform designed to help developers build and deploy modern web applications more quickly. This project and many web applications can be deployed on Vercel with a single click for free. No need to understand code, Linux, have a server, pay, or set up an OpenAI API proxy. The downside is that you need to bind a domain name to access it without restrictions in China.
+Vercel 是全球雲平台，幫助開發者快速建置與部署現代 Web 應用。本專案及許多 Web 應用可一鍵免費部署到 Vercel。缺點是中國需綁定網域才能無限制存取。
 
-## How to obtain a domain name?
+## 如何取得網域名稱？
 
-1. Register with a domain provider, such as Namesilo (supports Alipay) or Cloudflare for international providers, and Wanwang for domestic providers in China.
-2. Free domain name providers: eu.org (second-level domain), etc.
-3. Ask friends for a free second-level domain.
+1. 註冊網域供應商：Namesilo（支援支付寶）、Cloudflare（國際）、萬網（中國）。
+2. 免費網域供應商：eu.org（二級網域）等。
+3. 向朋友索取免費二級網域。
 
-## How to obtain a server
+## 如何取得伺服器？
 
-- Examples of international server providers: Amazon Web Services, Google Cloud, Vultr, Bandwagon, Hostdare, etc.
-  International server considerations: Server lines affect access speed in China; CN2 GIA and CN2 lines are recommended. If the server has difficulty accessing in China (serious packet loss, etc.), you can try using a CDN (from providers like Cloudflare).
-- Domestic server providers: Alibaba Cloud, Tencent, etc.
-  Domestic server considerations: Domain name resolution requires filing; domestic server bandwidth is relatively expensive; accessing foreign websites (Github, OpenAI, etc.) requires a proxy.
+- 國際伺服器供應商：AWS、Google Cloud、Vultr、Bandwagon、Hostdare 等。  
+  注意：伺服器線路影響中國存取速度，推薦 CN2 GIA 或 CN2 線路。若存取困難，可嘗試 CDN（如 Cloudflare）。
+- 中國伺服器供應商：阿里雲、騰訊等。  
+  注意：網域解析需備案；國內伺服器頻寬昂貴；存取境外網站需代理。
 
-# OpenAI-related Questions
+# OpenAI 相關問題
 
-## How to register an OpenAI account?
+## 如何註冊 OpenAI 帳號？
 
-Go to chat.openai.com to register. You will need:
+前往 chat.openai.com 註冊，需要：
 
-- A good VPN (OpenAI only allows native IP addresses of supported regions)
-- A supported email (e.g., Gmail or a company/school email, not Outlook or QQ email)
-- A way to receive SMS verification (e.g., SMS-activate website)
+- 穩定 VPN（僅支援特定區域原生 IP）
+- 支援的 Email（如: Gmail、公司/學校信箱，不支援 Outlook 或 QQ）
+- 可接收簡訊驗證的方式（如: SMS-activate）
 
-## How to activate OpenAI API? How to check API balance?
+## 如何啟用 OpenAI API？如何查詢餘額？
 
-Official website (requires VPN): https://platform.openai.com/account/usage
-Some users have set up a proxy to check the balance without a VPN; ask online friends for access. Please verify the source is reliable to avoid API Key leakage.
+官方網站（需 VPN）：https://platform.openai.com/account/usage  
+部分用戶透過代理查詢餘額，請確認來源可靠以避免 API Key 洩漏。
 
-## Why doesn't my new OpenAI account have an API balance?
+## 為什麼新帳號沒有 API 餘額？
 
-(Updated April 6th) Newly registered accounts usually display API balance within 24 hours. New accounts are currently given a $5 balance.
+（2025/4/6 更新）新註冊帳號通常會在 24 小時內顯示 API 餘額。目前新帳號會獲得 5 美元餘額。
 
-## How to recharge OpenAI API?
+## 如何充值 OpenAI API？
 
-OpenAI only accepts credit cards from designated regions (Chinese credit cards cannot be used). If the credit cards from your region is not supported, some options include:
+OpenAI 僅接受指定地區的信用卡（中國信用卡不可用）。若你的地區不支援，可選擇：
 
-1. Depay virtual credit card
-2. Apply for a foreign credit card
-3. Find someone online to top up
+1. Depay 虛擬信用卡
+2. 申請外國信用卡
+3. 找人代充
 
-## How to access the GPT-4 API?
+## 如何存取 GPT-4 API？
 
-(Updated April 6th) Access to the GPT-4 API requires a separate application. Go to the following address and enter your information to join the waitlist (prepare your OpenAI organization ID): https://openai.com/waitlist/gpt-4-api
-Wait for email updates afterwards.
+（2025/4/6 更新）存取 GPT-4 API 需要單獨申請。前往以下地址並填寫資訊加入候補清單（需準備 OpenAI 組織 ID）：https://openai.com/waitlist/gpt-4-api  
+之後等待郵件通知。
 
-## How to use the Azure OpenAI interface
+## 如何使用 Azure OpenAI 介面？
 
-Please refer to: [#371](https://github.com/Yidadaa/ChatGPT-Next-Web/issues/371)
+請參考：[#371](https://github.com/Yidadaa/ChatGPT-Next-Web/issues/371)
 
-## Why is my Token consumed so fast?
+## 為什麼我的 Token 消耗很快？
 
-> Related discussion: [#518](https://github.com/Yidadaa/ChatGPT-Next-Web/issues/518)
+> 相關討論：[#518](https://github.com/Yidadaa/ChatGPT-Next-Web/issues/518)
 
-- If you have GPT-4 access and use GPT-4 API regularly, your bill will increase rapidly since GPT-4 pricing is about 15 times higher than GPT-3.5;
-- If you are using GPT-3.5 and not using it frequently, but still find your bill increasing fast, please troubleshoot immediately using these steps:
-  - Check your API key consumption record on the OpenAI website; if your token is consumed every hour and each time consumes tens of thousands of tokens, your key must have been leaked. Please delete it and regenerate it immediately. **Do not check your balance on random websites.**
-  - If your password is short, such as 5 characters or fewer, the cost of brute-forcing is very low. It is recommended to search docker logs to confirm whether someone has tried a large number of password combinations. Keyword: got access code
-- By following these two methods, you can locate the reason for your token's rapid consumption:
-  - If the OpenAI consumption record is abnormal but the Docker log has no issues, it means your API key has been leaked;
-  - If the Docker log shows a large number of got access code brute-force attempts, your password has been cracked.
+- 如果你有 GPT-4 存取權並經常使用，帳單會快速增加，因為 GPT-4 價格約為 GPT-3.5 的 15 倍；
+- 如果你使用 GPT-3.5 並不頻繁，但仍發現帳單快速增加，請立即排查：
+  - 在 OpenAI 網站檢查 API Key 消耗紀錄；若每小時消耗數萬 Token，代表 API Key 已洩漏。請立即刪除並重新生成。**不要在隨機網站查詢餘額。**
+  - 如果密碼過短（如: 5 位以下），暴力破解成本很低。建議檢查 Docker 日誌，確認是否有人嘗試大量密碼組合。關鍵字: got access code
+- 透過以上兩種方法，你可以定位 Token 快速消耗的原因：
+  - 若 OpenAI 消耗紀錄異常但 Docker 日誌正常 → API Key 洩漏；
+  - 若 Docker 日誌顯示大量暴力破解嘗試 → 密碼已被破解。
