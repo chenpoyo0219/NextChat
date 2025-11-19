@@ -92,7 +92,7 @@ keepalive_timeout 300;          # 設定 keep-alive 逾時為 65 秒
 - 檢查 API Key 是否可用；
 - 若仍無法判斷問題，請在 issue 區提交新 issue，並附上 Vercel 或 Docker 執行日誌。
 
-## 為什麼 ChatGPT 的回覆會亂碼？
+## 為什麼 ChatGPT 的回覆會是亂碼？
 
 在設定頁面 → 模型設定中，有一個 `temperature` 參數。如果此值大於 1，可能導致亂碼。請調整回 1 以內。
 
