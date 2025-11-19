@@ -108,7 +108,7 @@ API Key 有問題，餘額不足。
 
 由於 OpenAI 的 IP 限制，中國及部分地區無法直接連線，需要透過代理。
 
-- 正向代理：例如 VPN 。Docker 部署時可設定環境變數 `HTTP_PROXY` 為代理地址 (http://address:port)。
+- 正向代理：例如 VPN 。Docker 部署時可設定環境變數 `HTTP_PROXY` 為代理地址 ( http://address:port )。
 - 反向代理：可使用他人的代理地址，或透過 Cloudflare 免費設定。將專案環境變數 `BASE_URL` 設為代理地址。
 
 ## 可以在中國伺服器部署嗎？
